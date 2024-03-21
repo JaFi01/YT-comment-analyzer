@@ -1,0 +1,6 @@
+#My notes for future readme.md
+
+python3 -m venv ./.venv
+source ./.venv/bin/activate
+
+pip install google-api-python-client
