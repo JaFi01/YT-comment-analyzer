@@ -1,13 +1,14 @@
 from dotenv import load_dotenv
 from googleapiclient.discovery import build
 import os
+import re
 
 def main():
     load_dotenv()
     api_key_yt= os.getenv("YT_API_KEY")
 
-    video_url="https://www.youtube.com/watch?v=bRwvhAGdMBM"
-    id = video_url.split("=")[1]
+    video_url="https://www.youtube.com/watch?v=WAmEZBEeNmg&ab_channel=AkamaiDeveloper"
+    id = re.split('=|&' ,video_url)[1]
 
     youtube = build('youtube', 'v3', developerKey=api_key_yt)
 
