@@ -67,7 +67,8 @@ def prepare_comments(api_key_yt: str, id: str, total_comments: int):
         if not next_page_token or total_comments <= 0:
             break
     
-    get_comments_above_median_likes(comments_array=comments_array)
+    selected_comments = get_comments_above_median_likes(comments_array=comments_array)
+    return selected_comments
     
 def get_comments_above_median_likes(comments_array):
     """this function sorts comments by likes, and select best ones
@@ -90,10 +91,9 @@ def get_comments_above_median_likes(comments_array):
 
     # Return comments with likes higher than median or top 50 liked comments
     median_comments = [comment for comment in sorted_comments if comment[0] > median_likes][:50]
+    return median_comments
     
-    for i, median_comment in enumerate(median_comments):
-        output = str(median_comment[0]) + f" Likes + {median_comment[1]}:  {median_comment[2]}"
-        print(i+1, ". "+output)
+
 
 def main(api_key_yt, video_url):
     id = get_video_id(video_url)
@@ -104,7 +104,8 @@ def main(api_key_yt, video_url):
     total_comments = min(total_comments, comments_limit_amount) if total_comments else 0
     #print(total_comments)
     
-    prepare_comments(api_key_yt, id, total_comments)
+    selected_comments = prepare_comments(api_key_yt, id, total_comments)
+    return selected_comments
 
 
 if __name__ == "__main__":
