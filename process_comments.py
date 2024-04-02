@@ -30,7 +30,7 @@ def get_video_comment_count(video_url: str, api_key_yt: str):
         return total_comments
 
     except requests.exceptions.RequestException as e:
-        print(f"Error during API request: {e}")
+        print(f"Error during API request: {e}. Mayby URL to video might be incorrect")
         return None
     
 
@@ -67,42 +67,17 @@ def prepare_comments(api_key_yt: str, id: str, total_comments: int):
         if not next_page_token or total_comments <= 0:
             break
     
-    selected_comments = get_comments_above_median_likes(comments_array=comments_array)
-    return selected_comments
-    
-def get_comments_above_median_likes(comments_array):
-    """this function sorts comments by likes, and select best ones
-
-    Args:
-        comments_array (_type_): array of parsed coments
-    """
-
-    # Sort comments array by like count
-    sorted_comments = sorted(comments_array, key=lambda x: x[0], reverse=True)
-
-    # Calculate median
-    num_comments = len(sorted_comments)
-    if num_comments % 2 == 0:
-        median_index = num_comments // 2
-        median_likes = (sorted_comments[median_index - 1][0] + sorted_comments[median_index][0]) / 2
-    else:
-        median_index = num_comments // 2
-        median_likes = sorted_comments[median_index][0]
-
-    # Return comments with likes higher than median or top 50 liked comments
-    median_comments = [comment for comment in sorted_comments if comment[0] > median_likes][:50]
-    return median_comments
+    comments_array= sorted(comments_array, key=lambda x: x[0], reverse=True)
+    return comments_array
     
 
 
 def main(api_key_yt, video_url):
     id = get_video_id(video_url)
-
-     # Limiting amount of comment to read
-    comments_limit_amount = 500
+    # Limiting amount of comment to read
+    comments_limit_amount = 1500 #request on YT api are limited, so i need to limit amount of my request aswell
     total_comments = get_video_comment_count(video_url, api_key_yt)
     total_comments = min(total_comments, comments_limit_amount) if total_comments else 0
-    #print(total_comments)
     
     selected_comments = prepare_comments(api_key_yt, id, total_comments)
     return selected_comments

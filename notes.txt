@@ -5,3 +5,4 @@ source ./.venv/bin/activate
 
 pip install google-api-python-client
 pip install openai
+pip install vaderSentiment
