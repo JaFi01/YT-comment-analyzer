@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import SentimentChart from './SentimentChart';
 
 function App() {
   const [videoUrl, setVideoUrl] = useState('');
@@ -34,11 +35,15 @@ function App() {
       </form>
       {responseData && (
         <div>
+          <div style={{width: '60%'}}>
           <h2>GPT Response:</h2>
-          <pre>{JSON.stringify(responseData.gpt_response, null, 2)}</pre>
+            <p>{JSON.stringify(responseData.gpt_response, null, 2)}</p>
+          </div>
           <h2>VADER Response:</h2>
           <p>Negative points: {responseData.negative_points}</p>
           <p>Positive points: {responseData.positive_points}</p>
+          <SentimentChart sentiment={{negative: responseData.negative_points, positive: responseData.positive_points}}/>
+
         </div>
       )}
       {error && <p>Error: {error}</p>}
