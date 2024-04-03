@@ -1,3 +1,4 @@
+from flask import jsonify
 from openai import OpenAI
 def comments_for_gpt(selected_comments):
     selected_comments = [comment for comment in selected_comments[:20] if len(comment[2]) <= 2000] #ignoring ultra long comments to save time and tokens
@@ -28,5 +29,5 @@ def main(gpt_api_key, selected_comments):
     )
 
     asistant_response = response.choices[0].message.content
-    usage = response.usage
-    print(f"\n GPT-analysis: {asistant_response} cost: {usage}")
+    #usage = response.usage
+    return asistant_response

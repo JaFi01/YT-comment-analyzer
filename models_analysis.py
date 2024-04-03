@@ -1,3 +1,4 @@
+from flask import jsonify
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 def normalize_like_amount(like_amount, max_like_amount):
@@ -37,7 +38,7 @@ def main(comments_array):
         if sentiment is not None:
             sum_of_points[0] += sentiment[0]  # Negative
             sum_of_points[1] += sentiment[1]  # Positive
-    return sum_of_points
+    return sum_of_points 
     
     
     
