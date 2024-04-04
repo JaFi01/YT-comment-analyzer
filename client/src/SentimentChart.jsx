@@ -29,9 +29,9 @@ const SentimentChart = ({ sentiment }) => {
       <h2>Sentiment Analysis Chart</h2>
       <ResponsiveContainer width="100%" height={300}>
       <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
+          <CartesianGrid strokeDasharray="2 3" />
+          <XAxis dataKey="name" label={{ value: "Sentiment", position: "insideBottom", offset: -5 }} />
+          <YAxis label={{ value: "Value", angle: -90, position: "insideLeft", offset: -5 }} />
           <Tooltip />
           <Legend />
           <Bar dataKey="value" fill="#8884d8" />
