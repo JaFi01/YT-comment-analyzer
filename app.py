@@ -27,11 +27,13 @@ def analyze_video():
     # Analiza VADER
     neg_and_pos_content = run_vader(selected_comments[:200])
     negative_points, positive_points = neg_and_pos_content
+    comments_highlights =(selected_comments[:3])
     
     return jsonify({
         "gpt_response": gpt_response,
         "negative_points": negative_points,
-        "positive_points": positive_points
+        "positive_points": positive_points,
+        "comments_highlights": comments_highlights
     })
 
 if __name__ == "__main__":
