@@ -26,12 +26,11 @@ const SentimentChart = ({ sentiment }) => {
   ];
   return (
     <>
-      <h2>Sentiment Analysis Chart</h2>
       <ResponsiveContainer width="100%" height={300}>
       <BarChart data={data}>
           <CartesianGrid strokeDasharray="2 3" />
-          <XAxis dataKey="name" label={{ value: "Sentiment", position: "insideBottom", offset: -5 }} />
-          <YAxis label={{ value: "Value", angle: -90, position: "insideLeft", offset: -5 }} />
+          <XAxis margin={{bottom: 30}} dataKey="name" label={{ value: "Sentiment of comment multiplied by likes amount", position: "insideBottom", offset: -5 }} />
+          <YAxis label={{ value: "% of comments", angle: -90, position: "Left", offset: -5 }} />
           <Tooltip />
           <Legend />
           <Bar dataKey="value" fill="#8884d8" />

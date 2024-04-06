@@ -2,11 +2,12 @@ import re
 import json
 
 def prepare_word_cloud(selected_comments):
-    first_comments = " ".join(comment[2] for comment in selected_comments[:10])
+    first_comments = " ".join(comment[2] for comment in selected_comments[:150])
     # Usunięcie znaków interpunkcyjnych
     first_comments = re.sub(r'[^\w\s]', '', first_comments)
     # Zamiana spacji na znak '%20'
-    first_comments = first_comments.replace(" ", "%20").replace("\n", "%20")
+    first_comments = first_comments.replace(" ", "%20").replace("\n", "%20")[:1500]
+    first_comments = re.sub(r'\bthe\b', '', first_comments)
     colors_rgba = [
     "rgba(143, 191, 224, 1)",   # Light Blue
     "rgba(124, 119, 185, 1)",   # Purple
@@ -15,7 +16,7 @@ def prepare_word_cloud(selected_comments):
     "rgba(20, 255, 247, 1)"     # Aqua
 ]
     colors_json = json.dumps(colors_rgba)
-    query = f"https://quickchart.io/wordcloud?text={first_comments}&rotation=0&colors={colors_json}&height=400"
+    query = f"https://quickchart.io/wordcloud?text={first_comments}&rotation=0&colors={colors_json}&height=400&removeStopwords=true"
     return(query)
     
     #https://quickchart.io/wordcloud?text=To%20be%20or%20not%20to%20be%2C%20that%20is%20the%20question

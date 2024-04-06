@@ -4,6 +4,12 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 def normalize_like_amount(like_amount, max_like_amount):
     return like_amount/max_like_amount * 10
 
+def points_to_percent(sum_of_points):
+    total= sum(sum_of_points)
+    normalized_values = [round((value / total) * 100) for value in sum_of_points]
+    return normalized_values
+
+
 
 def analyze_sentiment(comment: str, value: float):
     """Analyse Positive and negative content in message, and pultiply sentiment based on likes count in that comment
@@ -38,6 +44,7 @@ def main(comments_array):
         if sentiment is not None:
             sum_of_points[0] += sentiment[0]  # Negative
             sum_of_points[1] += sentiment[1]  # Positive
+    sum_of_points = points_to_percent(sum_of_points)
     return sum_of_points 
     
     

@@ -21,11 +21,11 @@ def analyze_video():
     
     selected_comments = pre_process_comments(api_key_yt, video_url)
     
-    # Analiza GPT
+    # GPT
     api_gpt_key = os.getenv("OPENAI_API_KEY")
     gpt_response = run_gpt(api_gpt_key, selected_comments)
     
-    # Analiza VADER
+    # VADER
     neg_and_pos_content = run_vader(selected_comments[:200])
     negative_points, positive_points = neg_and_pos_content
     comments_highlights =(selected_comments[:3])
