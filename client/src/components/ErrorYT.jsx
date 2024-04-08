@@ -1,6 +1,6 @@
 import React from 'react';
 import {Row, Alert} from 'react-bootstrap';
-import image_err from './images/image_wrongYT.svg'
+import image_err from '../images/image_wrongYT.svg'
 
 const ErrorYT = () => {
 
