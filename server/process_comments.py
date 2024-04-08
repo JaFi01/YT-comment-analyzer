@@ -85,7 +85,7 @@ def main(api_key_yt, video_url):
         return False
     # Limiting amount of comment to read
     total_comments = False
-    comments_limit_amount = 1000 #request on YT api are limited, so i need to limit amount of my request aswell
+    comments_limit_amount = 2000 #request on YT api are limited, so i need to limit amount of my request aswell
     total_comments = get_video_comment_count(video_url, api_key_yt)
     if (total_comments == False):
         return False

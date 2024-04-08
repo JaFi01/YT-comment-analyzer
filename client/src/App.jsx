@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button, Card, Spinner, Alert } from "react-bootstrap";
 import axios from "axios";
-import SentimentChart from "./SentimentChart";
-import HighlightedComments from "./HighlightedComments";
-import Description from "./Description";
-import ErrorYT from "./ErrorYT";
+import SentimentChart from "./components/SentimentChart";
+import HighlightedComments from "./components/HighlightedComments";
+import Description from "./components/Description";
+import ErrorYT from "./components/ErrorYT";
+import AIResponse from "./AIResponse";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -80,15 +81,12 @@ function App() {
       )}
       
 
+
       {responseData && !responseData.error_status_YT_url && (
       <Row className="pt-4">        
           <Col md={5} className="m-3">
             <h2>AI Response:</h2>
-            <Card>
-              <Card.Body>
-                <p>{JSON.stringify(responseData.gpt_response, null, 2)}</p>
-              </Card.Body>
-            </Card>
+            <AIResponse gptResponse={responseData.gpt_response} />
             <h2 className="pt-4">Highlighted Comments</h2>
             <HighlightedComments comments={responseData.comments_highlights} />
           </Col>
