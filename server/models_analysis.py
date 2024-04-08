@@ -1,7 +1,8 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 def normalize_like_amount(like_amount, max_like_amount):
-    return max_like_amount - like_amount*0.7
+    difference = max_like_amount - like_amount
+    return like_amount + (difference * 0.33)
 
 def points_to_percent(sum_of_points):
     total= sum(sum_of_points)

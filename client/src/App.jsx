@@ -54,7 +54,7 @@ function App() {
             />
           </div>
           <div>
-            <Button variant="primary" type="submit" disabled={loading}>
+            <Button className="mt-2 p-2" variant="primary" type="submit" disabled={loading}>
               {loading ? (
                 <>
                   <Spinner
@@ -89,7 +89,7 @@ function App() {
                 <p>{JSON.stringify(responseData.gpt_response, null, 2)}</p>
               </Card.Body>
             </Card>
-            <h2>Highlighted Comments</h2>
+            <h2 className="pt-4">Highlighted Comments</h2>
             <HighlightedComments comments={responseData.comments_highlights} />
           </Col>
           <Col md={6} className="m-3">
@@ -100,7 +100,7 @@ function App() {
                 positive: responseData.positive_points,
               }}
             />
-            <img src={responseData.wordcloud_content} alt="Word Cloud" />
+            <img className='pt-5' src={responseData.wordcloud_content} alt="Word Cloud" />
           </Col>
         </Row>
       )}  

@@ -6,7 +6,7 @@ def comments_for_gpt(selected_comments):
     for i, selected_comment in enumerate(selected_comments):
         output = str(selected_comment[0]) + f" Likes: {selected_comment[2]}"
         comments_to_string += output
-        print(i+1, ". "+output)
+        #print(i+1, ". "+output)
 
     return comments_to_string
 

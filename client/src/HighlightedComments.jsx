@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 
 const CommentCard = ({ comment }) => {
   return (
-    <Card>
+    <Card className='mt-1'>
       <Card.Body>
         <Card.Text>{comment[2]}</Card.Text>
         <Card.Subtitle className="mb-2 text-muted">{comment[1]}</Card.Subtitle>

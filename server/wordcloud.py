@@ -19,4 +19,4 @@ def prepare_word_cloud(selected_comments):
     query = f"https://quickchart.io/wordcloud?text={first_comments}&rotation=0&colors={colors_json}&height=400&removeStopwords=true"
     return(query)
     
-    #https://quickchart.io/wordcloud?text=To%20be%20or%20not%20to%20be%2C%20that%20is%20the%20question
+    

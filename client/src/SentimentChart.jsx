@@ -29,7 +29,7 @@ const SentimentChart = ({ sentiment }) => {
       <ResponsiveContainer width="100%" height={300}>
       <BarChart data={data}>
           <CartesianGrid strokeDasharray="2 3" />
-          <XAxis margin={{bottom: 30}} dataKey="name" label={{ value: "Sentiment of comment multiplied by likes amount", position: "insideBottom", offset: -5 }} />
+          <XAxis margin={{bottom: 30}} dataKey="name" label={{ value: "Sentiment of comments multiplied by weighted likes number", position: "insideBottom", offset: -5 }} />
           <YAxis label={{ value: "% of comments", angle: -90, position: "Left", offset: -5 }} />
           <Tooltip />
           <Legend />
