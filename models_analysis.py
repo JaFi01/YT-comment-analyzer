@@ -1,8 +1,7 @@
-from flask import jsonify
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 def normalize_like_amount(like_amount, max_like_amount):
-    return like_amount/max_like_amount * 10
+    return max_like_amount - like_amount*0.7
 
 def points_to_percent(sum_of_points):
     total= sum(sum_of_points)

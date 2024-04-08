@@ -3,7 +3,11 @@ import requests
 
 def get_video_id(video_url: str):
     """Quick function stripping url to get video id"""
-    return video_url.split('?v=')[1].split('&')[0]
+    try:
+        return video_url.split('?v=')[1].split('&')[0]
+    except:
+        return False
+
 
 
 def get_video_comment_count(video_url: str, api_key_yt: str):
@@ -25,13 +29,16 @@ def get_video_comment_count(video_url: str, api_key_yt: str):
         response.raise_for_status() 
         data = response.json()
         #Extracting total comment threads count
-        total_comments = int(data['items'][0]['statistics']['commentCount'])
-        
-        return total_comments
+        try:
+            total_comments = int(data['items'][0]['statistics']['commentCount'])        
+            return total_comments
+        except:
+            return False
 
     except requests.exceptions.RequestException as e:
         print(f"Error during API request: {e}. Mayby URL to video might be incorrect")
-        return None
+        ans = "Error ocured during requesting comments for video. Is URL address correct? Error: {e}"
+        return ans
     
 
 def prepare_comments(api_key_yt: str, id: str, total_comments: int):
@@ -74,14 +81,16 @@ def prepare_comments(api_key_yt: str, id: str, total_comments: int):
 
 def main(api_key_yt, video_url):
     id = get_video_id(video_url)
+    if (id == False):
+        return False
     # Limiting amount of comment to read
+    total_comments = False
     comments_limit_amount = 1000 #request on YT api are limited, so i need to limit amount of my request aswell
     total_comments = get_video_comment_count(video_url, api_key_yt)
-    total_comments = min(total_comments, comments_limit_amount) if total_comments else 0
-    
-    selected_comments = prepare_comments(api_key_yt, id, total_comments)
-    return selected_comments
-
-
-if __name__ == "__main__":
-    main()
+    if (total_comments == False):
+        return False
+    else:
+        total_comments = min(total_comments, comments_limit_amount) if total_comments else 0
+        
+        selected_comments = prepare_comments(api_key_yt, id, total_comments)
+        return selected_comments

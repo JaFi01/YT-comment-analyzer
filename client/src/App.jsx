@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Button, Card, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Button, Card, Spinner, Alert } from "react-bootstrap";
 import axios from "axios";
 import SentimentChart from "./SentimentChart";
 import HighlightedComments from "./HighlightedComments";
 import Description from "./Description";
+import ErrorYT from "./ErrorYT";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         video_url: videoUrl,
       });
       setResponseData(response.data);
+      console.log(responseData)
       setLoading(false);
     } catch (error) {
       setError(error.response.data.message);
@@ -72,9 +74,14 @@ function App() {
           </div>
         </form>
       </Row>
+      {error && <p>Error: {error}</p>}
+      {responseData && responseData.error_status_YT_url &&(
+        <ErrorYT></ErrorYT>
+      )}
+      
 
-      {responseData && (
-        <Row className="pt-4">
+      {responseData && !responseData.error_status_YT_url && (
+      <Row className="pt-4">        
           <Col md={5} className="m-3">
             <h2>AI Response:</h2>
             <Card>
@@ -96,9 +103,9 @@ function App() {
             <img src={responseData.wordcloud_content} alt="Word Cloud" />
           </Col>
         </Row>
-      )}
+      )}  
 
-      {error && <p>Error: {error}</p>}
+     
     </Container>
   );
 }
