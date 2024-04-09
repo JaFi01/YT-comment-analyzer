@@ -27,7 +27,6 @@ function App() {
         video_url: videoUrl,
       });
       setResponseData(response.data);
-      console.log(responseData)
       setLoading(false);
     } catch (error) {
       setError(error.response.data.message);
