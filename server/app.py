@@ -9,15 +9,8 @@ from gpt_analysis import main as run_gpt
 from models_analysis import main as run_vader
 from wordcloud import prepare_word_cloud
 
-app = Flask (__name__, static_folder='client/build', static_url_path='')
+app = Flask (__name__)
 CORS(app)  
-
-def check_video_existence(video_url):
-    try:
-        response = requests.head(video_url)
-        return response.status_code == 200
-    except requests.RequestException:
-        return False
 
 @app.route('/analyze_video', methods=['POST'])
 @cross_origin()
@@ -51,10 +44,6 @@ def analyze_video():
         "wordcloud_content": wordcloud_querry,
         "error_status_YT_url": False   
     })
-@app.route('/')
-@cross_origin()
-def serve():
-    return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
