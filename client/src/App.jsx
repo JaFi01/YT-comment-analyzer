@@ -23,7 +23,7 @@ function App() {
     setLoading(true);
     try {
       setLoading(true);
-      const response = await axios.post("http://127.0.0.1:8000/analyze_video", {
+      const response = await axios.post("https://yt-api-server-3bvqotho7a-lm.a.run.app//analyze_video", {
         video_url: videoUrl,
       });
       setResponseData(response.data);

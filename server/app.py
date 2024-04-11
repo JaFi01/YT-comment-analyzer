@@ -9,11 +9,11 @@ from gpt_analysis import main as run_gpt
 from models_analysis import main as run_vader
 from wordcloud import prepare_word_cloud
 
+load_dotenv()
 app = Flask (__name__)
 CORS(app)  
 
-@app.route('/test', methods=['GET'])
-@cross_origin()
+@app.route('/')
 def test():
     return 'server online'
 
@@ -51,4 +51,4 @@ def analyze_video():
     })
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    app.run()
