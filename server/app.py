@@ -15,9 +15,7 @@ CORS(app)
 @app.route('/test', methods=['GET'])
 @cross_origin()
 def test():
-    return(
-        {"status": "server is online"}
-    )
+    return 'server online'
 
 @app.route('/analyze_video', methods=['POST'])
 @cross_origin()
@@ -53,4 +51,4 @@ def analyze_video():
     })
 
 if __name__ == "__main__":
-    app.run(dport=8000)
+    app.run(port=8000)
