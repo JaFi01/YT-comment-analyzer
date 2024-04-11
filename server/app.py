@@ -12,6 +12,13 @@ from wordcloud import prepare_word_cloud
 app = Flask (__name__)
 CORS(app)  
 
+@app.route('/test', methods=['GET'])
+@cross_origin()
+def test():
+    return(
+        {"status": "server is online"}
+    )
+
 @app.route('/analyze_video', methods=['POST'])
 @cross_origin()
 def analyze_video():
@@ -46,4 +53,4 @@ def analyze_video():
     })
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    app.run(dport=8000)

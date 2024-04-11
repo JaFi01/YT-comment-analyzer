@@ -23,7 +23,7 @@ function App() {
     setLoading(true);
     try {
       setLoading(true);
-      const response = await axios.post("https://yt-sentiment-analysis-2ff7dc62560b.herokuapp.com//analyze_video", {
+      const response = await axios.post("http://127.0.0.1:8000/analyze_video", {
         video_url: videoUrl,
       });
       setResponseData(response.data);
