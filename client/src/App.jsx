@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Container, Row, Col, Button, Card, Spinner, Alert } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Button, Spinner, } from "react-bootstrap";
 import axios from "axios";
 import SentimentChart from "./components/SentimentChart";
 import HighlightedComments from "./components/HighlightedComments";
@@ -7,6 +7,7 @@ import Description from "./components/Description";
 import ErrorYT from "./components/ErrorYT";
 import AIResponse from "./AIResponse";
 import "bootstrap/dist/css/bootstrap.min.css";
+import.meta.env.VITE_SERVER_URL_ANALYSIS
 
 function App() {
   const [videoUrl, setVideoUrl] = useState("");
@@ -23,11 +24,10 @@ function App() {
     setLoading(true);
     try {
       setLoading(true);
-      const response = await axios.post("https://yt-api-server-3bvqotho7a-lm.a.run.app//analyze_video", {
+      const response = await axios.post(import.meta.env.VITE_SERVER_URL_ANALYSIS, {
         video_url: videoUrl,
       });
       setResponseData(response.data);
-      console.log(responseData)
       setLoading(false);
     } catch (error) {
       setError(error.response.data.message);
@@ -44,7 +44,7 @@ function App() {
       <Row md={12} className="mx-4 mt-4">
         <form onSubmit={handleSubmit} className="">
           <div className="form-group">
-            <label htmlFor="videoUrl">Enter YouTube Video URL:</label>
+            <label htmlFor="videoUrl"><b>Enter YouTube Video URL:</b></label>
             <br />
             <input
               type="text"
@@ -98,7 +98,8 @@ function App() {
                 positive: responseData.positive_points,
               }}
             />
-            <img className='pt-5' src={responseData.wordcloud_content} alt="Word Cloud" />
+            <h2 className="pt-4">Wordcloud</h2>
+            <img className='pt-1' src={responseData.wordcloud_content} alt="Word Cloud" />
           </Col>
         </Row>
       )}  
