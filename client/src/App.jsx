@@ -15,6 +15,15 @@ function App() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // This useEffect is designed to wake up the serverless container on Cloud Run when the
+  // user requests data for the first time. It aims to reduce cold start time by about 4-5
+  // seconds on the initial request. The axios GET request is triggered only when responseData
+  // is null, preventing unnecessary calls to the server on subsequent requests.
+   useEffect(() => {
+    if(responseData == null){
+     axios.get(import.meta.env.VITE_SERVER_URL)}
+  }, [])
+
   const handleInputChange = (event) => {
     setVideoUrl(event.target.value);
   };

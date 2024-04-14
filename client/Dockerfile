@@ -1,18 +1,21 @@
-# Użyj obrazu node do budowy aplikacji
-FROM node:20 AS builder
 
-# Ustaw katalog roboczy w kontenerze
+FROM node:18-alpine
+
 WORKDIR /app
 
-# Skopiuj pliki projektu
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
 
-# Zainstaluj zależności i zbuduj aplikację
-RUN npm install
 RUN npm run build
 
-# Utwórz obraz z budowaną aplikacją
-FROM nginx:alpine
-COPY --from=builder /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ENV PORT=8080
+ENV HOST=0.0.0.0
+ENV VITE_SERVER_URL="hidden for github"
+ENV VITE_SERVER_URL_ANALYSIS="hidden for github"
+
+EXPOSE 8080
+
+CMD [ "npm", "run", "preview" ]
