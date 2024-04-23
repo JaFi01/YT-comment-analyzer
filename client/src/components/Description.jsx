@@ -29,6 +29,12 @@ const Description = () => {
           WordCloud is a cluster of the words that occur the most.
         </Accordion.Body>
       </Accordion.Item>
+      <Accordion.Item eventKey="4">
+        <Accordion.Header>Creator, technologies </Accordion.Header>
+        <Accordion.Body>
+          This project was created by Jarosław Filipek. Source code is at <a href="https://github.com/JaFi01/YT-comment-analyzer">GitHub</a>
+        </Accordion.Body>
+      </Accordion.Item>
     </Accordion>
   );
 };

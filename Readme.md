@@ -61,7 +61,7 @@ python3 app.py
 ```
 or
 ```bash
-python3 app.py
+python app.py
 ```
 
 6. Access the application:
