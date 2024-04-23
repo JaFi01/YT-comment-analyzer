@@ -33,7 +33,13 @@ For the deployed, running version, visit [THIS PAGE](https://yt-comment-analyzer
   ```bash
 cd YouTube-Comment-Analyzer
 ```
-3.  Install dependencies: 
+
+3. Select branch local (which contains app running on localhost)
+  ```bash
+git fetch --all
+git checkout local
+```
+4.  Install dependencies: 
 
 ```bash
 cd client
@@ -41,7 +47,7 @@ npm install
 cd ../server
 pip install -r requirements.txt
 ```
-4. Set up environment variables:
+5. Set up environment variables:
 
 Create a `.env` file in the `server` directory and add the following variables:
 
@@ -49,13 +55,13 @@ Create a `.env` file in the `server` directory and add the following variables:
 YT_API_KEY=your-youtube-api-key
 OPENAI_API_KEY=your-openai-api-key
 ```
-5. 1 Run the client aplication:
+6. 1 Run the client aplication:
 In terminal 1: client directory
 ```bash
 npm run dev
 ```
 
-5. 2 Run server aplication
+6. 2 Run server aplication
 ```bash
 python3 app.py
 ```
@@ -64,7 +70,7 @@ or
 python app.py
 ```
 
-6. Access the application:
+7. Access the application:
 
 Open your web browser and navigate to `http://localhost:5173` or other localhost providded by vite to access the **YouTube Comment Analyzer**.
 
