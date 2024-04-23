@@ -19,9 +19,10 @@ function App() {
   // user requests data for the first time. It aims to reduce cold start time by about 4-5
   // seconds on the initial request. The axios GET request is triggered only when responseData
   // is null, preventing unnecessary calls to the server on subsequent requests.
+  //it is useless when running app on localhost.
    useEffect(() => {
     if(responseData == null){
-     axios.get(import.meta.env.VITE_SERVER_URL)}
+     axios.get("http://127.0.0.1:8080")}
   }, [])
 
   const handleInputChange = (event) => {
@@ -33,7 +34,7 @@ function App() {
     setLoading(true);
     try {
       setLoading(true);
-      const response = await axios.post(import.meta.env.VITE_SERVER_URL_ANALYSIS, {
+      const response = await axios.post("http://127.0.0.1:8080/analyze_video", {
         video_url: videoUrl,
       });
       setResponseData(response.data);
