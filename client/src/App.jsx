@@ -5,7 +5,7 @@ import SentimentChart from "./components/SentimentChart";
 import HighlightedComments from "./components/HighlightedComments";
 import Description from "./components/Description";
 import ErrorYT from "./components/ErrorYT";
-import AIResponse from "./AIResponse";
+import AIResponse from "./components/AIResponse";
 import "bootstrap/dist/css/bootstrap.min.css";
 import.meta.env.VITE_SERVER_URL_ANALYSIS
 
