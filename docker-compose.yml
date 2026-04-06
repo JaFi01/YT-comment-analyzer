@@ -1,0 +1,27 @@
+services:
+  server:
+    build: ./server
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      YT_API_KEY: ${YT_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    env_file:
+      - ./.env
+
+  client:
+    build:
+      context: ./client
+      args:
+        VITE_SERVER_URL: http://localhost:5000
+        VITE_SERVER_URL_ANALYSIS: http://localhost:5000/analyze_video
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      HOST: 0.0.0.0
+      VITE_SERVER_URL: http://localhost:5000
+      VITE_SERVER_URL_ANALYSIS: http://localhost:5000/analyze_video
+    depends_on:
+      - server

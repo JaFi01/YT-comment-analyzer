@@ -1,21 +1,23 @@
-
-FROM node:18-alpine
+FROM oven/bun:1-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json bun.lock* ./
 
-RUN npm install
+RUN bun install --frozen-lockfile
 
 COPY . .
 
-RUN npm run build
+ARG VITE_SERVER_URL=http://localhost:5000
+ARG VITE_SERVER_URL_ANALYSIS=http://localhost:5000/analyze_video
+ENV VITE_SERVER_URL=$VITE_SERVER_URL
+ENV VITE_SERVER_URL_ANALYSIS=$VITE_SERVER_URL_ANALYSIS
+
+RUN bun run build
 
 ENV PORT=8080
 ENV HOST=0.0.0.0
-ENV VITE_SERVER_URL="hidden for github"
-ENV VITE_SERVER_URL_ANALYSIS="hidden for github"
 
 EXPOSE 8080
 
-CMD [ "npm", "run", "preview" ]
+CMD [ "bun", "run", "preview" ]
