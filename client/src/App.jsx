@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Spinner, } from "react-bootstrap";
-import axios from "axios";
 import SentimentChart from "./components/SentimentChart";
 import HighlightedComments from "./components/HighlightedComments";
 import Description from "./components/Description";
@@ -15,13 +14,12 @@ function App() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // This useEffect is designed to wake up the serverless container on Cloud Run when the
-  // user requests data for the first time. It aims to reduce cold start time by about 4-5
-  // seconds on the initial request. The axios GET request is triggered only when responseData
-  // is null, preventing unnecessary calls to the server on subsequent requests.
+  // Warms up the Cloud Run container on first load to reduce cold-start latency (~4-5s).
+  // Fires only once when responseData is null.
    useEffect(() => {
-    if(responseData == null){
-     axios.get(import.meta.env.VITE_SERVER_URL)}
+    if (responseData == null) {
+      fetch(import.meta.env.VITE_SERVER_URL)
+    }
   }, [])
 
   const handleInputChange = (event) => {
@@ -33,13 +31,22 @@ function App() {
     setLoading(true);
     try {
       setLoading(true);
-      const response = await axios.post(import.meta.env.VITE_SERVER_URL_ANALYSIS, {
-        video_url: videoUrl,
+      const response = await fetch(import.meta.env.VITE_SERVER_URL_ANALYSIS, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ video_url: videoUrl }),
       });
-      setResponseData(response.data);
+      if (!response.ok) {
+        const errData = await response.json();
+        setError(errData.message);
+        setLoading(false);
+        return;
+      }
+      const data = await response.json();
+      setResponseData(data);
       setLoading(false);
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error.message);
       setLoading(false);
     }
   };
